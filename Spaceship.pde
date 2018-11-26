@@ -15,23 +15,6 @@ class Spaceship extends Floater {
        myDirectionX = 0;
        myDirectionY = 0;
    }
-   public void control () { 
-     private boolean key37Pressed = false;
-     private boolean key38Pressed = false;
-     private boolean key39Pressed = false;
-     private boolean key40Pressed = false;
-     if (keyPressed && keyCode == 38) {
-       key38Pressed = true;
-       accelerate(0.5);
-     } else if (keyPressed && keyCode == 40) {
-       accelerate(-0.5);
-     }
-     if (keyPressed && keyCode == 37) {
-       turn(-5);
-     }else if (keyPressed && keyCode == 39) {
-       turn(5);
-     }
-   }
    public void setX(int x) { myCenterX = x; }  
    public int getX() { return (int)myCenterX; }   
    public void setY(int y) { myCenterY = y; }   

@@ -22,11 +22,33 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void accelerate (double dAmount)   
   {          
     //convert the current direction the floater is pointing to radians    
-    double dRadians =myPointDirection*(Math.PI/180);     
+    double dRadians = myPointDirection*(Math.PI/180);     
     //change coordinates of direction of travel    
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
-  }   
+  }  
+  public void decelerate (double dAmount) {          
+    //convert the current direction the floater is pointing to radians    
+    double dRadians = myPointDirection*(Math.PI/180);
+
+    // convert movement into angle
+    double getAngleX = Math.acos(abs((float)(myDirectionX / Math.sqrt(Math.pow((float)myDirectionY,2) + Math.pow((float)myDirectionX,2)))));
+    double getAngleY = Math.asin(abs((float)(myDirectionY / Math.sqrt(Math.pow((float)myDirectionY,2) + Math.pow((float)myDirectionX,2)))));
+
+    //change coordinates of direction of travel
+    if (myDirectionX < 0) {
+       myDirectionX += dAmount * Math.cos(getAngleX);
+    } 
+    if (myDirectionX > 0) {
+       myDirectionX -= dAmount * Math.cos(getAngleX);
+    }
+    if (myDirectionY < 0) {
+      myDirectionY += dAmount * Math.sin(getAngleY);
+    }
+    if (myDirectionY > 0) {
+      myDirectionY -= dAmount * Math.sin(getAngleY);
+    }
+  }
   public void turn (int nDegreesOfRotation)   
   {     
     //rotates the floater by a given number of degrees    
@@ -60,8 +82,8 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void show ()  //Draws the floater at the current position  
   {             
     fill(myColor);   
-    stroke(myColor);    
-    
+    stroke(myColor);  
+    strokeWeight(0);
     //translate the (x,y) center of the ship to the correct position
     translate((float)myCenterX, (float)myCenterY);
 

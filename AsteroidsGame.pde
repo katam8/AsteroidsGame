@@ -1,9 +1,10 @@
 //your variable declarations here
 Spaceship ss;
 Star[] s;
+boolean upIsPressed, downIsPressed, leftIsPressed, rightIsPressed, zIsPressed = false;
+
 public void setup() {
   //your code here
-  background(#5168D8);
   size(600, 600);
   ss = new Spaceship();
   ss.setX(width/2);
@@ -15,17 +16,41 @@ public void setup() {
 }
 public void draw() {
   //your code here
-  background(#000F29);
+  background(#00010F);
   for(int q = 0; q < s.length; q++) {
     s[q].show();
   }
   ss.show();
-  ss.control();
   ss.move();
+  System.out.println("X speed: " + ss.myDirectionX + " Y speed: " + ss.myDirectionY);
+  if(leftIsPressed) {
+    ss.turn(-10);
+  } else if (rightIsPressed) {
+    ss.turn(10);
+  } 
+  if (upIsPressed) { 
+    ss.accelerate(0.5);
+  } else if (!upIsPressed) {
+    ss.decelerate(0.25);
+    if (ss.getDirectionX() > -0.1 && ss.getDirectionX() < 0.1) {
+      ss.setDirectionX(0); 
+    }
+    if (ss.getDirectionY() > -0.1 && ss.getDirectionY() < 0.1) {
+      ss.setDirectionY(0); 
+    }
+  }
 }
 
-public void keyPressed() {
-  if (keyPressed && keyCode == 90) {
-    ss.HyperSpace();
-  }
+void keyPressed() {
+   if (key == 'z') { ss.HyperSpace(); }
+   else if (keyCode == UP) {  upIsPressed = true; }
+   else if (keyCode == DOWN) { downIsPressed = true; } 
+   else if (keyCode == LEFT) { leftIsPressed = true; } 
+   else if (keyCode == RIGHT) { rightIsPressed = true; }
+}
+void keyReleased() {
+  if (keyCode == UP) { upIsPressed = false; }
+  else if (keyCode == DOWN) { downIsPressed = false; }
+  else if (keyCode == LEFT) { leftIsPressed = false; }
+  else if (keyCode == RIGHT) { rightIsPressed = false; }
 }
