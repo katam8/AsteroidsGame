@@ -6,7 +6,7 @@ class Spaceship extends Floater {
      int[] yArray = {-8, 0, 8, 0};
      xCorners = xArray;
      yCorners = yArray;
-     myColor = #A4C4FA;
+     myColor = #ADFFEA;
    }
    public void HyperSpace() {
        myCenterX = Math.random()*width + 1;

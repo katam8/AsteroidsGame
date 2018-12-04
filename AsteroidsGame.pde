@@ -1,6 +1,6 @@
 //your variable declarations here
 Spaceship ss;
-Star[] s;
+Star[] a;
 boolean upIsPressed, downIsPressed, leftIsPressed, rightIsPressed, zIsPressed = false;
 
 public void setup() {
@@ -9,20 +9,20 @@ public void setup() {
   ss = new Spaceship();
   ss.setX(width/2);
   ss.setY(height/2);
-  s = new Star[350];
-  for(int q = 0; q < s.length; q++) {
-    s[q] = new Star();
+  a = new Star[250];
+  for(int q = 0; q < a.length; q++) {
+    a[q] = new Star();
   }
 }
 public void draw() {
   //your code here
   background(#00010F);
-  for(int q = 0; q < s.length; q++) {
-    s[q].show();
+  for(int q = 0; q < a.length; q++) {
+    a[q].show();
   }
   ss.show();
+  
   ss.move();
-  System.out.println("X speed: " + ss.myDirectionX + " Y speed: " + ss.myDirectionY);
   if(leftIsPressed) {
     ss.turn(-10);
   } else if (rightIsPressed) {
