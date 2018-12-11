@@ -33,6 +33,7 @@ public void draw() {
   for(int i = 0; i < rocks.size(); i++) {
     rocks.get(i).show();
     rocks.get(i).move();
+    //int(
   }
   
   ss.show();
