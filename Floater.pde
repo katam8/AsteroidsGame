@@ -83,7 +83,8 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   {             
     fill(myColor);   
     stroke(myColor);  
-    strokeWeight(0);
+    //strokeWeight(0);
+    noStroke();
     //translate the (x,y) center of the ship to the correct position
     translate((float)myCenterX, (float)myCenterY);
 

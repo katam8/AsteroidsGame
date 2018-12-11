@@ -1,28 +1,44 @@
 //your variable declarations here
 Spaceship ss;
-Star[] a;
+Star[] stars;
+ArrayList <Asteroid> rocks;
 boolean upIsPressed, downIsPressed, leftIsPressed, rightIsPressed, zIsPressed = false;
 
 public void setup() {
   //your code here
   size(600, 600);
+  //SpaceShip
   ss = new Spaceship();
   ss.setX(width/2);
   ss.setY(height/2);
-  a = new Star[250];
-  for(int q = 0; q < a.length; q++) {
-    a[q] = new Star();
+  //Stars
+  stars = new Star[250];
+  for(int i = 0; i < stars.length; i++) {
+    stars[i] = new Star();
+  }
+  //Asteroids
+  rocks = new ArrayList <Asteroid>();
+  for(int i = 0; i < 30; i++) {
+    rocks.add(new Asteroid());  
   }
 }
 public void draw() {
   //your code here
   background(#00010F);
-  for(int q = 0; q < a.length; q++) {
-    a[q].show();
-  }
-  ss.show();
   
+  for(int i = 0; i < stars.length; i++) {
+    stars[i].show();
+  }
+  
+  for(int i = 0; i < rocks.size(); i++) {
+    rocks.get(i).show();
+    rocks.get(i).move();
+  }
+  
+  ss.show();
   ss.move();
+  
+  // Movement
   if(leftIsPressed) {
     ss.turn(-10);
   } else if (rightIsPressed) {
@@ -42,7 +58,7 @@ public void draw() {
 }
 
 void keyPressed() {
-   if (key == 'z') { ss.HyperSpace(); }
+   if (keyCode == 90) { ss.HyperSpace(); }
    else if (keyCode == UP) {  upIsPressed = true; }
    else if (keyCode == DOWN) { downIsPressed = true; } 
    else if (keyCode == LEFT) { leftIsPressed = true; } 

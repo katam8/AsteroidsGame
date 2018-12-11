@@ -9,8 +9,8 @@ class Spaceship extends Floater {
      myColor = #ADFFEA;
    }
    public void HyperSpace() {
-       myCenterX = Math.random()*width + 1;
-       myCenterY = Math.random()*height + 1;
+       myCenterX = (int)Math.random()*width + 1;
+       myCenterY = (int)Math.random()*height + 1;
        myPointDirection = Math.random()*360;
        myDirectionX = 0;
        myDirectionY = 0;
