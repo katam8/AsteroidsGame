@@ -1,7 +1,7 @@
 class Asteroid extends Floater {
   private int rotation;
   public Asteroid() {
-    myColor = #FFD99B;
+    myColor = #FF7CDA;
     myCenterX = Math.random() * width ;
     myCenterY = Math.random() * height ; 
     myDirectionX = (Math.random() * 5 - 3) / 2;

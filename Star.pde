@@ -8,8 +8,7 @@ class Star //note that this class does NOT extend Floater
   }
   //public void 
   public void show() {
-    strokeWeight((float)(Math.random()*3+1));
-    stroke(#FFFFFF);
+    strokeWeight((float)(Math.random()*4+1));
     point(starX, starY);
   }
 }
