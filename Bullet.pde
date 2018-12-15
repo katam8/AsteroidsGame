@@ -1,25 +1,29 @@
 class Bullet extends Floater {
   double dRadians;
   public Bullet(Spaceship sS) {
-    corners = 4;
-    int[] xS = {-2, 2, 2, -2};
-    int[] yS = {2, 2, -2, -2};
-    //for (int i = 0; i < corners; i++) { yS[i] = yS[i] * 2; xS[i] = xS[i] * 2; }
-    xCorners = xS;   
-    yCorners = yS;
     myColor = #FF215D;
     myCenterX = sS.getX();
     myCenterY = sS.getY();
+    myPointDirection = sS.getPointDirection();
     dRadians = myPointDirection*(Math.PI/180);
     myDirectionX = 5 * Math.cos(dRadians) + sS.getDirectionX();;
     myDirectionY = 5 * Math.sin(dRadians) + sS.getDirectionX();;
-    myPointDirection = sS.myPointDirection;
   }
 
-  public void move() {
-    //change the x and y coordinates by myDirectionX and myDirectionY       
+  public void move() {      
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY; 
+    if(myCenterX < 0) { shots.remove(this); }
+    if(myCenterX > width) { shots.remove(this); }
+    if (myCenterY < 0) { shots.remove(this); }  
+    if (myCenterY > height) { shots.remove(this); }
+  }
+
+  public void show () {
+    fill(myColor);
+    stroke(myColor);
+    ellipse( (float)myCenterX, (float)myCenterY, 2, 2);
+   
   }
   
   public void setX(int x) { myCenterX = x; }  

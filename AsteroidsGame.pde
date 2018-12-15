@@ -25,29 +25,24 @@ public void setup() {
 }
 public void draw() {
   //your code here
-  background(#00010F);
-  //Bullet 
-  for (int i = 0; i < shots.size(); i++) {
-    shots.get(i).show();
-    shots.get(i).move();
-    if (shots.get(i).myCenterX > width)
-    {     
-      shots.remove(i);
-    } else if (shots.get(i).myCenterX < 0)
-    {     
-      shots.remove(this);
-    }    
-    if (shots.get(i).myCenterY > height)
-    {    
-      shots.remove(0);
-    } else if (shots.get(i).myCenterY < 0)
-    {     
-      shots.remove(0);
+  fill(0,0,0, 105);
+  rect(0, 0, width, height);
+  //Bullet
+  for (int i=0; i< shots.size(); i++){
+      shots.get(i).show();
+      shots.get(i).move();
+  }
+  for(int i = 0; i < shots.size(); i++) {
+    for(int z = 0; z < rocks.size(); z++) {
+      if(dist(shots.get(i).getX(), shots.get(i).getY(), rocks.get(z).getX(), rocks.get(z).getY()) < 10) {
+          rocks.remove(z);
+          break;
+      }
     }
   }
   //Star
   for (int i = 0; i < stars.length; i++) {
-    stroke((float)(Math.random()*255), (float)(Math.random()*255), (float)(Math.random()*255));
+    stroke((float)(Math.random()*255), (float)(Math.random()*255), (float)(Math.random()*255), 220);
     stars[i].show();
   }
   //Asteroid
@@ -57,15 +52,13 @@ public void draw() {
     if (dist(ss.getX(), ss.getY(), rocks.get(i).getX(), rocks.get(i).getY()) < 20) {
       rocks.remove(i);
       break;
-    } else if (dist(rocks.get(i).getX(), rocks.get(i).getY(), shots.get(0).getX(), shots.get(0).getY()) < 20) {
-      rocks.remove(i);
-      break;
     }
+  }
 
-    ss.show();
-    ss.move();
+  ss.show();
+  ss.move();
 
-    // Movement
+  // Movement
     if (leftIsPressed) {
       ss.turn(-10);
     } else if (rightIsPressed) {
@@ -82,14 +75,17 @@ public void draw() {
         ss.setDirectionY(0);
       }
     }
+    if(spacePressed) {
+      shots.add(0, new Bullet(ss));
+    }
   }
-}
+
 
   void keyPressed() {
     if (keyCode == 90) { 
       ss.HyperSpace();
     } else if (keyCode == 32) { 
-      shots.add(0, new Bullet(ss));
+      spacePressed = true;
     } else if (keyCode == UP) {  
       upIsPressed = true;
     } else if (keyCode == DOWN) { 
@@ -109,5 +105,7 @@ public void draw() {
       leftIsPressed = false;
     } else if (keyCode == RIGHT) { 
       rightIsPressed = false;
+    } else if (keyCode == 32) {
+      spacePressed = false;
     }
   }
